@@ -170,8 +170,9 @@ export function tok(code: string, language): Ttoken[] {
     return tags;
 }
 
+
 // Convert to JsonML tree
-export function jml(code: string, tokens: Ttoken[], prefix = 'hl-'): any[] {
+export function jml(code: string, tokens: Ttoken[], classAttr = 'class', prefix = 'hl-', tag = 'span'): any[] {
     var pos = 0;
     var list = [];
     for(var token of tokens) {
@@ -179,8 +180,11 @@ export function jml(code: string, tokens: Ttoken[], prefix = 'hl-'): any[] {
         if(pos < start) {
             list.push(code.substring(pos, start));
         }
-        list.push(['span', {'class': prefix + style}, code.substring(start, end)]);
+        list.push([tag, {[classAttr]: prefix + style}, code.substring(start, end)]);
         pos = end;
+    }
+    if(pos < code.length) {
+        list.push(code.substring(pos));
     }
     return list;
 }

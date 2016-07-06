@@ -130,8 +130,10 @@ function tok(code, language) {
     return tags;
 }
 exports.tok = tok;
-function jml(code, tokens, prefix) {
+function jml(code, tokens, classAttr, prefix, tag) {
+    if (classAttr === void 0) { classAttr = 'class'; }
     if (prefix === void 0) { prefix = 'hl-'; }
+    if (tag === void 0) { tag = 'span'; }
     var pos = 0;
     var list = [];
     for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
@@ -140,10 +142,14 @@ function jml(code, tokens, prefix) {
         if (pos < start) {
             list.push(code.substring(pos, start));
         }
-        list.push(['span', { 'class': prefix + style }, code.substring(start, end)]);
+        list.push([tag, (_a = {}, _a[classAttr] = prefix + style, _a), code.substring(start, end)]);
         pos = end;
     }
+    if (pos < code.length) {
+        list.push(code.substring(pos));
+    }
     return list;
+    var _a;
 }
 exports.jml = jml;
 function css(root, prefix) {

@@ -295,7 +295,7 @@ module.exports = [
       9
     ],
     [
-      /[A-Za-z0-9_-]+[ \t]*:/g,
+      /[A-Za-z0-9_-]+[ \t]*/g,
       'property',
       -1
     ],

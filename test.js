@@ -5,7 +5,7 @@ var tok = hl.tok, jml = hl.jml, css = hl.css;
 //          000000000011111111112222222222233333333334444
 //          012345678901234567890123456789012345678901234
 var code = '// comment\n// TODO: trololo\nvar lol = 123; function(arg) { return this; }';
-code = 'html {color: red;}';
+code = 'html {color: red; background: rgba(0,0,0);} ';
 
 var language = require('./lang/javascript');
 language = require('./lang/css');
