@@ -130,10 +130,11 @@ function tok(code, language) {
     return tags;
 }
 exports.tok = tok;
-function jml(code, tokens, classAttr, prefix, tag) {
+function jml(code, tokens, classAttr, prefix, tag, position) {
     if (classAttr === void 0) { classAttr = 'class'; }
     if (prefix === void 0) { prefix = 'hl-'; }
     if (tag === void 0) { tag = 'span'; }
+    if (position === void 0) { position = false; }
     var pos = 0;
     var list = [];
     for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
@@ -142,7 +143,11 @@ function jml(code, tokens, classAttr, prefix, tag) {
         if (pos < start) {
             list.push(code.substring(pos, start));
         }
-        list.push([tag, (_a = {}, _a[classAttr] = prefix + style, _a), code.substring(start, end)]);
+        var attributes = (_a = {}, _a[classAttr] = prefix + style, _a);
+        if (position) {
+            attributes['data-pos'] = start + "," + end;
+        }
+        list.push([tag, attributes, code.substring(start, end)]);
         pos = end;
     }
     if (pos < code.length) {

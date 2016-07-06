@@ -172,7 +172,7 @@ export function tok(code: string, language): Ttoken[] {
 
 
 // Convert to JsonML tree
-export function jml(code: string, tokens: Ttoken[], classAttr = 'class', prefix = 'hl-', tag = 'span'): any[] {
+export function jml(code: string, tokens: Ttoken[], classAttr = 'class', prefix = 'hl-', tag = 'span', position = false): any[] {
     var pos = 0;
     var list = [];
     for(var token of tokens) {
@@ -180,7 +180,14 @@ export function jml(code: string, tokens: Ttoken[], classAttr = 'class', prefix 
         if(pos < start) {
             list.push(code.substring(pos, start));
         }
-        list.push([tag, {[classAttr]: prefix + style}, code.substring(start, end)]);
+
+        // JsonML node
+        var attributes = {[classAttr]: prefix + style};
+        if(position) {
+            attributes['data-pos'] = `${start},${end}`;
+        }
+        list.push([tag, attributes, code.substring(start, end)]);
+
         pos = end;
     }
     if(pos < code.length) {
