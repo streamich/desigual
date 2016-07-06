@@ -1,0 +1,16 @@
+{
+  "name": "desigual",
+  "description": "Syntax highlighter",
+  "version": "1.0.0",
+  "keywords": [
+    "desigual",
+    "syntax",
+    "highlighter",
+    "hightlight"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/streamich/desigual"
+  },
+  "main": "index.js"
+}

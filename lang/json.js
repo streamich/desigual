@@ -1,0 +1,21 @@
+module.exports = [
+    [
+        [
+            /\{/g,
+            'cbracket',
+            1
+        ]
+    ],
+    [
+        [
+            /\}/g,
+            'cbracket',
+            -2
+        ],
+        [
+            /.+/g,
+            null,
+            1
+        ]
+    ]
+];
